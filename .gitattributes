@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Keep the same line endings on every computer
+* text=auto eol=lf
+
+# Images are binary, never convert them
+*.png binary
+*.jpg binary
+*.jpeg binary
