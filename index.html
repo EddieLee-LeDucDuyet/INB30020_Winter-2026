@@ -1,157 +1,887 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Microsoft's AI Partnership Test</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap">
-<style>
-/* Layout: single reading column (~66ch) with a masthead band; figures sit on white plates so charts read in both themes. */
-:root {
-  --bg: #fbfbf9;
-  --ink: #17201c;
-  --ink-2: #4c5752;
-  --rule: #dfe3df;
-  --accent: #1d6a4f;
-  --link: #1a5a8f;
-  --chip: #e8f1ec;
-  --plate: #ffffff;
-  --display: "Newsreader", Georgia, "Times New Roman", serif;
-  --text: "Public Sans", "Helvetica Neue", Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121614; --ink: #e9ede9; --ink-2: #a9b4ae; --rule: #2c3430;
-  --accent: #5cc29a; --link: #8cc0ee; --chip: #1d2a24; --plate: #ffffff; color-scheme: dark; } }
-:root[data-theme="dark"] {
-  --bg: #121614; --ink: #e9ede9; --ink-2: #a9b4ae; --rule: #2c3430;
-  --accent: #5cc29a; --link: #8cc0ee; --chip: #1d2a24; --plate: #ffffff; color-scheme: dark; }
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Microsoft's AI Partnership Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      /* Layout: single reading column (~66ch) with a masthead band; figures sit on white plates so charts read in both themes. */
+      :root {
+        --bg: #fbfbf9;
+        --ink: #17201c;
+        --ink-2: #4c5752;
+        --rule: #dfe3df;
+        --accent: #1d6a4f;
+        --link: #1a5a8f;
+        --chip: #e8f1ec;
+        --plate: #ffffff;
+        --display: "Newsreader", Georgia, "Times New Roman", serif;
+        --text: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #121614;
+          --ink: #e9ede9;
+          --ink-2: #a9b4ae;
+          --rule: #2c3430;
+          --accent: #5cc29a;
+          --link: #8cc0ee;
+          --chip: #1d2a24;
+          --plate: #ffffff;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #121614;
+        --ink: #e9ede9;
+        --ink-2: #a9b4ae;
+        --rule: #2c3430;
+        --accent: #5cc29a;
+        --link: #8cc0ee;
+        --chip: #1d2a24;
+        --plate: #ffffff;
+        color-scheme: dark;
+      }
 
-body { background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.65; }
-.masthead { border-bottom: 1px solid var(--rule); }
-.masthead .in, main, footer .in { max-width: 44rem; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.masthead .in { padding-block: 14px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.brand { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; }
-.brand span { color: var(--accent); }
-.edition { font-size: 0.75rem; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
-main { padding-block: 40px 24px; }
-.kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 12px; }
-h1 { font-family: var(--display); font-weight: 600; font-size: clamp(2rem, 5.2vw, 2.9rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 16px; text-wrap: balance; }
-.standfirst { font-size: 1.2rem; line-height: 1.5; color: var(--ink-2); margin: 0 0 28px; }
-.byline { display: grid; grid-template-columns: 1fr 1.6fr; gap: 20px; padding-block: 18px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-size: 0.85rem; margin-bottom: 32px; }
-.byline h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 4px; font-weight: 700; }
-.byline p { margin: 0; color: var(--ink-2); }
-.byline .name { color: var(--ink); font-weight: 600; }
-article p { margin: 0 0 1.1em; }
-article h2 { font-family: var(--display); font-weight: 600; font-size: 1.6rem; line-height: 1.2; margin: 1.8em 0 0.5em; text-wrap: balance; }
-a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { text-decoration-thickness: 2px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-figure { margin: 2em 0; }
-.plate { background: var(--plate); border-radius: 6px; padding: 12px; border: 1px solid var(--rule); }
-.plate img { display: block; width: 100%; height: auto; }
-figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 10px; line-height: 1.5; }
-.fig-n { font-weight: 700; color: var(--ink); margin-right: 4px; }
-.sdgs { margin: 40px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); }
-.sdgs h3, .refs h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 12px; }
-.sdgs ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.sdgs li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 0.82rem; }
-.sdgs b { color: var(--accent); margin-right: 4px; }
-.refs { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--rule); }
-.refs ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.refs li { font-size: 0.85rem; line-height: 1.55; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; color: var(--ink-2); }
-.pr { display: inline-block; text-indent: 0; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); border: 1px solid currentColor; border-radius: 4px; padding: 0 5px; margin-left: 4px; }
-footer { border-top: 1px solid var(--rule); margin-top: 40px; }
-footer .in { padding-block: 18px 28px; font-size: 0.8rem; color: var(--ink-2); }
-@media (max-width: 560px) {
-  body { font-size: 16px; }
-  .byline { grid-template-columns: 1fr; gap: 12px; }
-  .plate { padding: 6px; }
-}
-</style>
-</head>
-<body>
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--text);
+        font-size: 17px;
+        line-height: 1.65;
+      }
+      .masthead {
+        border-bottom: 1px solid var(--rule);
+      }
+      .masthead .in,
+      main,
+      footer .in {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding-left: max(16px, env(safe-area-inset-left, 0px));
+        padding-right: max(16px, env(safe-area-inset-right, 0px));
+      }
+      .masthead .in {
+        padding-block: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 1.25rem;
+        letter-spacing: -0.01em;
+      }
+      .brand span {
+        color: var(--accent);
+      }
+      .edition {
+        font-size: 0.75rem;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      main {
+        padding-block: 40px 24px;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin: 0 0 12px;
+      }
+      h1 {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: clamp(2rem, 5.2vw, 2.9rem);
+        line-height: 1.1;
+        letter-spacing: -0.015em;
+        margin: 0 0 16px;
+        text-wrap: balance;
+      }
+      .standfirst {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: var(--ink-2);
+        margin: 0 0 28px;
+      }
+      .byline {
+        display: grid;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 20px;
+        padding-block: 18px;
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+        font-size: 0.85rem;
+        margin-bottom: 32px;
+      }
+      .byline h3 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--ink-2);
+        margin: 0 0 4px;
+        font-weight: 700;
+      }
+      .byline p {
+        margin: 0;
+        color: var(--ink-2);
+      }
+      .byline .name {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      article p {
+        margin: 0 0 1.1em;
+      }
+      article h2 {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin: 1.8em 0 0.5em;
+        text-wrap: balance;
+      }
+      a {
+        color: var(--link);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+      figure {
+        margin: 2em 0;
+      }
+      .plate {
+        background: var(--plate);
+        border-radius: 6px;
+        padding: 12px;
+        border: 1px solid var(--rule);
+      }
+      .plate img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      figcaption {
+        font-size: 0.85rem;
+        color: var(--ink-2);
+        margin-top: 10px;
+        line-height: 1.5;
+      }
+      .fig-n {
+        font-weight: 700;
+        color: var(--ink);
+        margin-right: 4px;
+      }
+      .sdgs {
+        margin: 40px 0 0;
+        padding-top: 20px;
+        border-top: 1px solid var(--rule);
+      }
+      .sdgs h3,
+      .refs h3 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--ink-2);
+        margin: 0 0 12px;
+      }
+      .sdgs ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .sdgs li {
+        background: var(--chip);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 0.82rem;
+      }
+      .sdgs b {
+        color: var(--accent);
+        margin-right: 4px;
+      }
+      .refs {
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid var(--rule);
+      }
+      .refs ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+      .refs li {
+        font-size: 0.85rem;
+        line-height: 1.55;
+        padding-left: 2em;
+        text-indent: -2em;
+        overflow-wrap: anywhere;
+        color: var(--ink-2);
+      }
+      .pr {
+        display: inline-block;
+        text-indent: 0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--accent);
+        border: 1px solid currentColor;
+        border-radius: 4px;
+        padding: 0 5px;
+        margin-left: 4px;
+      }
+      footer {
+        border-top: 1px solid var(--rule);
+        margin-top: 40px;
+      }
+      footer .in {
+        padding-block: 18px 28px;
+        font-size: 0.8rem;
+        color: var(--ink-2);
+      }
+      @media (max-width: 560px) {
+        body {
+          font-size: 16px;
+        }
+        .byline {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .plate {
+          padding: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="in">
+        <div class="brand">Sustainability <span>Spotlight</span></div>
+        <div class="edition">Analysis · November 2026</div>
+      </div>
+    </header>
 
-<header class="masthead"><div class="in">
-  <div class="brand">Sustainability <span>Spotlight</span></div>
-  <div class="edition">Analysis · November 2026</div>
-</div></header>
-
-<main>
-  <p class="kicker">Business + Economy</p>
-  <h1>Microsoft wants AI to rescue the global goals. Its partners will decide whether it can</h1>
-  <p class="standfirst">Microsoft’s emissions jumped 25% in a year as it raced to build AI data centres. A strategy theory about why firms win together, not alone, explains both the promise and the problem.</p>
-  <div class="byline">
-    <div><h3>Author</h3><p class="name">[Student name]</p><p>[Course code and university]</p></div>
-    <div><h3>Disclosure statement</h3><p>[Student name] does not work for, consult, own shares in or receive funding from any company or organisation that would benefit from this article, and has disclosed no relevant affiliations beyond their academic appointment.</p></div>
-  </div>
-  <article>
-<p>Two reports Microsoft published this year tell very different stories about artificial intelligence.</p>
-<p>In July, the company revealed its greenhouse gas emissions rose <a href="https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/" target="_blank" rel="noopener">25% in a single year</a>, to <a href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/" target="_blank" rel="noopener">20.3 million tonnes</a> of carbon dioxide equivalent, driven largely by building data centres for AI. Two months later, its own researchers reported that <a href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/" target="_blank" rel="noopener">AI use is spreading faster in rich countries than poor ones</a>: 28.8% of working-age people in the Global North now use AI tools, against 16.2% in the Global South.</p>
-<p>Yet Microsoft also sells AI as a tool for the planet. Its <a href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future" target="_blank" rel="noopener">AI for Good Lab</a> works on climate, health and humanitarian problems, and the company has <a href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/" target="_blank" rel="noopener">pledged to be carbon negative by 2030</a>.</p>
-<p>Can both stories be true? The answer, I argue, depends less on Microsoft’s technology than on the quality of its relationships.</p>
-<figure><div class="plate"><img src="images/fig1.png" alt="Bar charts: Microsoft's total emissions rose from 16.2 to 20.3 million tonnes CO2e between FY2024 and FY2025; AI use among working-age people in June 2026 was 28.8% in the Global North, 18.8% worldwide and 16.2% in the Global South."></div>
-<figcaption><span class="fig-n">Figure 1</span> <em>Two numbers moving the wrong way. </em><a href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/" target="_blank" rel="noopener">Microsoft / ESG Dive</a>; <a href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/" target="_blank" rel="noopener">Microsoft AI Economy Institute</a></figcaption></figure>
-<h2>The global goals are slipping</h2>
-<p>The stakes are high. The UN’s <a href="https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf" target="_blank" rel="noopener">2026 progress report</a> found only 36% of <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener">Sustainable Development Goal</a> (SDG) targets are on track, while 15% have gone backwards since 2015.</p>
-<p>AI could help. A widely cited study in <a href="https://doi.org/10.1038/s41467-019-14108-y" target="_blank" rel="noopener">Nature Communications</a> concluded AI could enable 134 of the 169 SDG targets – but could also inhibit 59, often through its energy use and by widening inequality. A <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good" target="_blank" rel="noopener">2024 McKinsey analysis</a> identified about 600 ways AI could support the goals, with more than 80% already in use somewhere.</p>
-<p>The problem is scale. Of the AI-for-SDG foundation grants McKinsey analysed, 55% were worth US$250,000 or less, and only 10% went to organisations based in low- or middle-income countries.</p>
-<h2>Advantage lives between firms</h2>
-<p>Strategy scholars offer a useful lens. The <a href="https://doi.org/10.5465/amr.1998.1255632" target="_blank" rel="noopener">relational view</a>, proposed by Jeffrey Dyer and Harbir Singh in 1998, argues that competitive advantage often comes not from what a firm owns but from what it builds with partners. They identify four sources of these “relational rents”: investments tailored to a specific partnership; routines for sharing knowledge; complementary resources worth more combined than apart; and governance that builds trust.</p>
-<p>Microsoft’s AI for Good work is essentially a relational strategy. The company has the models and the cloud. It does not own satellites, clinics or conservation scientists.</p>
-<p>Take the <a href="https://arxiv.org/abs/2503.14860" target="_blank" rel="noopener">Global Renewables Watch</a>. Microsoft’s lab combined its AI with satellite imagery from Planet Labs and land-use expertise from The Nature Conservancy to map 86,410 solar farms and 375,197 wind turbines worldwide, quarter by quarter since 2017. No single partner could have built it – a textbook case of complementary resources supporting clean energy (SDG 7) and climate action (SDG 13).</p>
-<p>In health, Microsoft researchers <a href="https://doi.org/10.3389/ijph.2023.1606716" target="_blank" rel="noopener">describe</a> working with the global health non-profit PATH to deploy AI in low- and middle-income countries, from reading rapid diagnostic tests to modelling vaccine efficacy, stressing “co-design” with local communities (SDG 3). That is a knowledge-sharing routine in action.</p>
-<figure><div class="plate"><img src="images/fig2.png" alt="Diagram of the relational view's four sources of relational rents applied to Microsoft: complementary resources, knowledge-sharing routines, relation-specific assets and effective governance."></div>
-<figcaption><span class="fig-n">Figure 2</span> <em>The four sources of relational advantage, applied to Microsoft. Adapted from </em><a href="https://doi.org/10.5465/amr.1998.1255632" target="_blank" rel="noopener">Dyer and Singh (1998)</a>.</figcaption></figure>
-<h2>Why partnerships stall</h2>
-<p>The relational view also explains why so many projects stay small. When McKinsey surveyed about 60 experts, the top barriers to scaling AI for good were data (73%), talent (48%) and organisational readiness (43%). Each is a relational problem: the data sits with governments, telecoms and satellite firms; the talent sits in big tech; the frontline know-how sits with NGOs.</p>
-<figure><div class="plate"><img src="images/fig3.png" alt="Bar chart of top barriers to scaling AI for the SDGs: data 73%, talent 48%, organisational receptiveness 43%, funding 37%, community trust 28%, inability to form partnerships 27%, technology infrastructure 22%."></div>
-<figcaption><span class="fig-n">Figure 3</span> <em>Most barriers are about who holds what. </em><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good" target="_blank" rel="noopener">McKinsey &amp; Company (2024)</a></figcaption></figure>
-<p>Research on business–nonprofit collaboration by <a href="https://doi.org/10.1177/0899764012450777" target="_blank" rel="noopener">Austin and Seitanidi</a> shows partnerships tend to move along a spectrum, from one-way philanthropy to “transformational” collaboration in which both sides change how they work. Many corporate AI-for-good efforts remain near the philanthropic end: small grants, cloud credits, pilots.</p>
-<p>A <a href="https://doi.org/10.1002/smj.2785" target="_blank" rel="noopener">2018 update</a> of the relational view adds a sharper warning. Partnerships create value, but someone captures it. If data, models and talent flow back to Redmond while partners in Nairobi or Montevideo stay dependent, the arrangement deepens the AI divide Microsoft’s own researchers are measuring – the opposite of reducing inequality (SDG 10).</p>
-<p>There are signs of a shift. Microsoft has opened data labs in <a href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future" target="_blank" rel="noopener">Kenya and Egypt</a>, giving African scientists access to satellite imagery, and <a href="https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub" target="_blank" rel="noopener">a new lab with Uruguay’s government</a>. These are relation-specific investments: harder to walk away from, and more likely to build local capability.</p>
-<h2>The same logic applies to carbon</h2>
-<p>Microsoft’s emissions problem is also a partnership problem. About <a href="https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/" target="_blank" rel="noopener">86% of its footprint</a> is “scope 3” – emissions in its supply chain, such as the steel and concrete in data centres.</p>
-<p>Here, too, Microsoft is turning to relationships. In 2025 it struck a deal for near-zero-emissions steel from Swedish company <a href="https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal" target="_blank" rel="noopener">Stegra</a>, whose hydrogen-based plant could cut emissions by up to 95% compared with coal-based steelmaking. Microsoft’s chief sustainability officer said the aim was to “signal demand, enable project financing, and accelerate global production”. The company now has <a href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/" target="_blank" rel="noopener">agreements for up to 40 gigawatts</a> of new renewable energy across 26 countries (SDGs 7, 9 and 13).</p>
-<p>These are exactly the commitments the theory predicts will create value. But they are not keeping pace. AI’s electricity demand could reach <a href="https://doi.org/10.1016/j.joule.2023.09.004" target="_blank" rel="noopener">85–134 terawatt-hours a year by 2027</a>, comparable to the annual consumption of Sweden or Argentina. Microsoft itself concedes “sustainability solutions are not scaling fast enough to meet demand”.</p>
-<h2>Making the relationships count</h2>
-<p>The relational view points to three practical moves.</p>
-<p>First, shift from short grants to long-term, co-owned partnerships in the Global South, where local institutions keep the data and skills they help create.</p>
-<p>Second, treat outputs such as satellite-derived datasets and trained models as digital public goods by default, so value is shared rather than captured.</p>
-<p>Third, report AI-for-good impact and the AI footprint in one ledger. A <a href="https://doi.org/10.1007/s13280-015-0684-2" target="_blank" rel="noopener">review in Ambio</a> of multistakeholder partnerships for sustainable development found little evidence of strong performance, and named clear goals, reliable funding and monitoring as conditions for success. Partnerships must be measured to be trusted.</p>
-<p>AI may yet become one of the strongest tools for meeting the SDGs. But for Microsoft, the decisive asset will not be its algorithms. It will be whether its partners end up stronger – and whether the planet’s ledger balances (SDG 17).</p>
-  </article>
-  <section class="sdgs" aria-label="UN Sustainable Development Goals discussed">
-    <h3>UN Sustainable Development Goals in this article</h3>
-    <ul><li><b>SDG 3</b> Good health</li><li><b>SDG 7</b> Clean energy</li><li><b>SDG 9</b> Industry & innovation</li><li><b>SDG 10</b> Reduced inequalities</li><li><b>SDG 13</b> Climate action</li><li><b>SDG 17</b> Partnerships</li></ul>
-  </section>
-  <section class="refs">
-    <h3>References (APA 7th)</h3>
-    <ol>
-<li>Austin, J. E., &amp; Seitanidi, M. M. (2012). Collaborative value creation: A review of partnering between nonprofits and businesses: Part I. <i>Nonprofit and Voluntary Sector Quarterly, 41</i>(5), 726–758. <a href="https://doi.org/10.1177/0899764012450777" target="_blank" rel="noopener">https://doi.org/10.1177/0899764012450777</a> <span class="pr">Peer-reviewed</span></li>
-<li>Bankhwal, M., Bisht, A., Chui, M., Roberts, R., &amp; van Heteren, A. (2024). <i>AI for social good: Improving lives and protecting the planet</i>. McKinsey &amp; Company. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good" target="_blank" rel="noopener">https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good</a></li>
-<li>de Vries, A. (2023). The growing energy footprint of artificial intelligence. <i>Joule, 7</i>(10), 2191–2194. <a href="https://doi.org/10.1016/j.joule.2023.09.004" target="_blank" rel="noopener">https://doi.org/10.1016/j.joule.2023.09.004</a> <span class="pr">Peer-reviewed</span></li>
-<li>Dyer, J. H., &amp; Singh, H. (1998). The relational view: Cooperative strategy and sources of interorganizational competitive advantage. <i>Academy of Management Review, 23</i>(4), 660–679. <a href="https://doi.org/10.5465/amr.1998.1255632" target="_blank" rel="noopener">https://doi.org/10.5465/amr.1998.1255632</a> <span class="pr">Peer-reviewed</span></li>
-<li>Dyer, J. H., Singh, H., &amp; Hesterly, W. S. (2018). The relational view revisited: A dynamic perspective on value creation and value capture. <i>Strategic Management Journal, 39</i>(12), 3140–3162. <a href="https://doi.org/10.1002/smj.2785" target="_blank" rel="noopener">https://doi.org/10.1002/smj.2785</a> <span class="pr">Peer-reviewed</span></li>
-<li>Gallucci, M. (2025, September 25). Sweden’s Stegra to supply green steel for Microsoft’s data centers. <i>Canary Media</i>. <a href="https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal" target="_blank" rel="noopener">https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal</a></li>
-<li>Johnson, L. (2026, July 13). Microsoft’s data center expansion drove 25% emissions spike in 2025: Report. <i>ESG Dive</i>. <a href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/" target="_blank" rel="noopener">https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/</a></li>
-<li>Lavista Ferres, J. M. (2026, September 21). <i>The continued state of global AI diffusion in 2026</i>. Microsoft On the Issues. <a href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/" target="_blank" rel="noopener">https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/</a></li>
-<li>Microsoft Research. (n.d.). <i>Creating a sustainable future</i>. AI for Good Research Lab. Retrieved November 7, 2026. <a href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future</a></li>
-<li>Pattberg, P., &amp; Widerberg, O. (2016). Transnational multistakeholder partnerships for sustainable development: Conditions for success. <i>Ambio, 45</i>(1), 42–51. <a href="https://doi.org/10.1007/s13280-015-0684-2" target="_blank" rel="noopener">https://doi.org/10.1007/s13280-015-0684-2</a> <span class="pr">Peer-reviewed</span></li>
-<li>Robinson, C., Ortiz, A., Kim, A., Dodhia, R., Zolli, A., Nagaraju, S. K., Oakleaf, J., Kiesecker, J., &amp; Lavista Ferres, J. M. (2025). <i>Global Renewables Watch: A temporal dataset of solar and wind energy derived from satellite imagery</i> (arXiv:2503.14860) [Preprint]. <a href="https://arxiv.org/abs/2503.14860" target="_blank" rel="noopener">https://arxiv.org/abs/2503.14860</a></li>
-<li>Segal, M. (2026, July 13). Microsoft’s carbon footprint jumps 25% as AI buildout challenges climate goals. <i>ESG Today</i>. <a href="https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/" target="_blank" rel="noopener">https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/</a></li>
-<li>Smith, B. (2020, January 16). <i>Microsoft will be carbon negative by 2030</i>. Official Microsoft Blog. <a href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/" target="_blank" rel="noopener">https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/</a></li>
-<li>Smith, B., &amp; Nakagawa, M. (2026, July 9). <i>Responsibly building the AI future</i>. Microsoft On the Issues. <a href="https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/" target="_blank" rel="noopener">https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/</a></li>
-<li>Thompson, E. (2026, March 17). Microsoft grows AI for Good program with Uruguay research hub. <i>EdTech Innovation Hub</i>. <a href="https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub" target="_blank" rel="noopener">https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub</a></li>
-<li>United Nations. (n.d.). <i>The 17 goals</i>. Department of Economic and Social Affairs. Retrieved November 7, 2026. <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener">https://sdgs.un.org/goals</a></li>
-<li>United Nations Statistics Division. (2026). <i>The Sustainable Development Goals report 2026</i> [Press release]. United Nations. <a href="https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf" target="_blank" rel="noopener">https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf</a></li>
-<li>Vinuesa, R., Azizpour, H., Leite, I., Balaam, M., Dignum, V., Domisch, S., Felländer, A., Langhans, S. D., Tegmark, M., &amp; Fuso Nerini, F. (2020). The role of artificial intelligence in achieving the Sustainable Development Goals. <i>Nature Communications, 11</i>, Article 233. <a href="https://doi.org/10.1038/s41467-019-14108-y" target="_blank" rel="noopener">https://doi.org/10.1038/s41467-019-14108-y</a> <span class="pr">Peer-reviewed</span></li>
-<li>Weeks, W. B., Taliesin, B., &amp; Lavista Ferres, J. M. (2023). Using artificial intelligence to advance public health. <i>International Journal of Public Health, 68</i>, Article 1606716. <a href="https://doi.org/10.3389/ijph.2023.1606716" target="_blank" rel="noopener">https://doi.org/10.3389/ijph.2023.1606716</a> <span class="pr">Peer-reviewed</span></li>
-    </ol>
-  </section>
-</main>
-<footer><div class="in">Sustainability Spotlight is a student publication exercise. Charts are the author's own, drawn from the sources cited in each caption.</div></footer>
-</body>
+    <main>
+      <p class="kicker">Business + Economy</p>
+      <h1>
+        Microsoft wants AI to rescue the global goals. Its partners will decide
+        whether it can
+      </h1>
+      <p class="standfirst">
+        Microsoft’s emissions jumped 25% in a year as it raced to build AI data
+        centres. A strategy theory about why firms win together, not alone,
+        explains both the promise and the problem.
+      </p>
+      <div class="byline">
+        <div>
+          <h3>Author</h3>
+          <p class="name">Le Duc Duyet</p>
+          <p>SWH02300/s105243570</p>
+        </div>
+        <div>
+          <h3>Disclosure statement</h3>
+          <p>
+            I, Le Duc Duyet does not work for, consult, own shares in or receive
+            funding from any company or organisation that would benefit from
+            this article, and has disclosed no relevant affiliations beyond
+            their academic appointment.
+          </p>
+        </div>
+      </div>
+      <article>
+        <p>
+          Two reports Microsoft published this year tell very different stories
+          about artificial intelligence.
+        </p>
+        <p>
+          In July, the company revealed its greenhouse gas emissions rose
+          <a
+            href="https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/"
+            target="_blank"
+            rel="noopener"
+            >25% in a single year</a
+          >, to
+          <a
+            href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/"
+            target="_blank"
+            rel="noopener"
+            >20.3 million tonnes</a
+          >
+          of carbon dioxide equivalent, driven largely by building data centres
+          for AI. Two months later, its own researchers reported that
+          <a
+            href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/"
+            target="_blank"
+            rel="noopener"
+            >AI use is spreading faster in rich countries than poor ones</a
+          >: 28.8% of working-age people in the Global North now use AI tools,
+          against 16.2% in the Global South.
+        </p>
+        <p>
+          Yet Microsoft also sells AI as a tool for the planet. Its
+          <a
+            href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future"
+            target="_blank"
+            rel="noopener"
+            >AI for Good Lab</a
+          >
+          works on climate, health and humanitarian problems, and the company
+          has
+          <a
+            href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/"
+            target="_blank"
+            rel="noopener"
+            >pledged to be carbon negative by 2030</a
+          >.
+        </p>
+        <p>
+          Can both stories be true? The answer, I argue, depends less on
+          Microsoft’s technology than on the quality of its relationships.
+        </p>
+        <figure>
+          <div class="plate">
+            <img
+              src="images/fig1.png"
+              alt="Bar charts: Microsoft's total emissions rose from 16.2 to 20.3 million tonnes CO2e between FY2024 and FY2025; AI use among working-age people in June 2026 was 28.8% in the Global North, 18.8% worldwide and 16.2% in the Global South."
+            />
+          </div>
+          <figcaption>
+            <span class="fig-n">Figure 1</span>
+            <em>Two numbers moving the wrong way. </em
+            ><a
+              href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/"
+              target="_blank"
+              rel="noopener"
+              >Microsoft / ESG Dive</a
+            >;
+            <a
+              href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/"
+              target="_blank"
+              rel="noopener"
+              >Microsoft AI Economy Institute</a
+            >
+          </figcaption>
+        </figure>
+        <h2>The global goals are slipping</h2>
+        <p>
+          The stakes are high. The UN’s
+          <a
+            href="https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf"
+            target="_blank"
+            rel="noopener"
+            >2026 progress report</a
+          >
+          found only 36% of
+          <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener"
+            >Sustainable Development Goal</a
+          >
+          (SDG) targets are on track, while 15% have gone backwards since 2015.
+        </p>
+        <p>
+          AI could help. A widely cited study in
+          <a
+            href="https://doi.org/10.1038/s41467-019-14108-y"
+            target="_blank"
+            rel="noopener"
+            >Nature Communications</a
+          >
+          concluded AI could enable 134 of the 169 SDG targets – but could also
+          inhibit 59, often through its energy use and by widening inequality. A
+          <a
+            href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good"
+            target="_blank"
+            rel="noopener"
+            >2024 McKinsey analysis</a
+          >
+          identified about 600 ways AI could support the goals, with more than
+          80% already in use somewhere.
+        </p>
+        <p>
+          The problem is scale. Of the AI-for-SDG foundation grants McKinsey
+          analysed, 55% were worth US$250,000 or less, and only 10% went to
+          organisations based in low- or middle-income countries.
+        </p>
+        <h2>Advantage lives between firms</h2>
+        <p>
+          Strategy scholars offer a useful lens. The
+          <a
+            href="https://doi.org/10.5465/amr.1998.1255632"
+            target="_blank"
+            rel="noopener"
+            >relational view</a
+          >, proposed by Jeffrey Dyer and Harbir Singh in 1998, argues that
+          competitive advantage often comes not from what a firm owns but from
+          what it builds with partners. They identify four sources of these
+          “relational rents”: investments tailored to a specific partnership;
+          routines for sharing knowledge; complementary resources worth more
+          combined than apart; and governance that builds trust.
+        </p>
+        <p>
+          Microsoft’s AI for Good work is essentially a relational strategy. The
+          company has the models and the cloud. It does not own satellites,
+          clinics or conservation scientists.
+        </p>
+        <p>
+          Take the
+          <a
+            href="https://arxiv.org/abs/2503.14860"
+            target="_blank"
+            rel="noopener"
+            >Global Renewables Watch</a
+          >. Microsoft’s lab combined its AI with satellite imagery from Planet
+          Labs and land-use expertise from The Nature Conservancy to map 86,410
+          solar farms and 375,197 wind turbines worldwide, quarter by quarter
+          since 2017. No single partner could have built it – a textbook case of
+          complementary resources supporting clean energy (SDG 7) and climate
+          action (SDG 13).
+        </p>
+        <p>
+          In health, Microsoft researchers
+          <a
+            href="https://doi.org/10.3389/ijph.2023.1606716"
+            target="_blank"
+            rel="noopener"
+            >describe</a
+          >
+          working with the global health non-profit PATH to deploy AI in low-
+          and middle-income countries, from reading rapid diagnostic tests to
+          modelling vaccine efficacy, stressing “co-design” with local
+          communities (SDG 3). That is a knowledge-sharing routine in action.
+        </p>
+        <figure>
+          <div class="plate">
+            <img
+              src="images/fig2.png"
+              alt="Diagram of the relational view's four sources of relational rents applied to Microsoft: complementary resources, knowledge-sharing routines, relation-specific assets and effective governance."
+            />
+          </div>
+          <figcaption>
+            <span class="fig-n">Figure 2</span>
+            <em
+              >The four sources of relational advantage, applied to Microsoft.
+              Adapted from </em
+            ><a
+              href="https://doi.org/10.5465/amr.1998.1255632"
+              target="_blank"
+              rel="noopener"
+              >Dyer and Singh (1998)</a
+            >.
+          </figcaption>
+        </figure>
+        <h2>Why partnerships stall</h2>
+        <p>
+          The relational view also explains why so many projects stay small.
+          When McKinsey surveyed about 60 experts, the top barriers to scaling
+          AI for good were data (73%), talent (48%) and organisational readiness
+          (43%). Each is a relational problem: the data sits with governments,
+          telecoms and satellite firms; the talent sits in big tech; the
+          frontline know-how sits with NGOs.
+        </p>
+        <figure>
+          <div class="plate">
+            <img
+              src="images/fig3.png"
+              alt="Bar chart of top barriers to scaling AI for the SDGs: data 73%, talent 48%, organisational receptiveness 43%, funding 37%, community trust 28%, inability to form partnerships 27%, technology infrastructure 22%."
+            />
+          </div>
+          <figcaption>
+            <span class="fig-n">Figure 3</span>
+            <em>Most barriers are about who holds what. </em
+            ><a
+              href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good"
+              target="_blank"
+              rel="noopener"
+              >McKinsey &amp; Company (2024)</a
+            >
+          </figcaption>
+        </figure>
+        <p>
+          Research on business–nonprofit collaboration by
+          <a
+            href="https://doi.org/10.1177/0899764012450777"
+            target="_blank"
+            rel="noopener"
+            >Austin and Seitanidi</a
+          >
+          shows partnerships tend to move along a spectrum, from one-way
+          philanthropy to “transformational” collaboration in which both sides
+          change how they work. Many corporate AI-for-good efforts remain near
+          the philanthropic end: small grants, cloud credits, pilots.
+        </p>
+        <p>
+          A
+          <a
+            href="https://doi.org/10.1002/smj.2785"
+            target="_blank"
+            rel="noopener"
+            >2018 update</a
+          >
+          of the relational view adds a sharper warning. Partnerships create
+          value, but someone captures it. If data, models and talent flow back
+          to Redmond while partners in Nairobi or Montevideo stay dependent, the
+          arrangement deepens the AI divide Microsoft’s own researchers are
+          measuring – the opposite of reducing inequality (SDG 10).
+        </p>
+        <p>
+          There are signs of a shift. Microsoft has opened data labs in
+          <a
+            href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future"
+            target="_blank"
+            rel="noopener"
+            >Kenya and Egypt</a
+          >, giving African scientists access to satellite imagery, and
+          <a
+            href="https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub"
+            target="_blank"
+            rel="noopener"
+            >a new lab with Uruguay’s government</a
+          >. These are relation-specific investments: harder to walk away from,
+          and more likely to build local capability.
+        </p>
+        <h2>The same logic applies to carbon</h2>
+        <p>
+          Microsoft’s emissions problem is also a partnership problem. About
+          <a
+            href="https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/"
+            target="_blank"
+            rel="noopener"
+            >86% of its footprint</a
+          >
+          is “scope 3” – emissions in its supply chain, such as the steel and
+          concrete in data centres.
+        </p>
+        <p>
+          Here, too, Microsoft is turning to relationships. In 2025 it struck a
+          deal for near-zero-emissions steel from Swedish company
+          <a
+            href="https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal"
+            target="_blank"
+            rel="noopener"
+            >Stegra</a
+          >, whose hydrogen-based plant could cut emissions by up to 95%
+          compared with coal-based steelmaking. Microsoft’s chief sustainability
+          officer said the aim was to “signal demand, enable project financing,
+          and accelerate global production”. The company now has
+          <a
+            href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/"
+            target="_blank"
+            rel="noopener"
+            >agreements for up to 40 gigawatts</a
+          >
+          of new renewable energy across 26 countries (SDGs 7, 9 and 13).
+        </p>
+        <p>
+          These are exactly the commitments the theory predicts will create
+          value. But they are not keeping pace. AI’s electricity demand could
+          reach
+          <a
+            href="https://doi.org/10.1016/j.joule.2023.09.004"
+            target="_blank"
+            rel="noopener"
+            >85–134 terawatt-hours a year by 2027</a
+          >, comparable to the annual consumption of Sweden or Argentina.
+          Microsoft itself concedes “sustainability solutions are not scaling
+          fast enough to meet demand”.
+        </p>
+        <h2>Making the relationships count</h2>
+        <p>The relational view points to three practical moves.</p>
+        <p>
+          First, shift from short grants to long-term, co-owned partnerships in
+          the Global South, where local institutions keep the data and skills
+          they help create.
+        </p>
+        <p>
+          Second, treat outputs such as satellite-derived datasets and trained
+          models as digital public goods by default, so value is shared rather
+          than captured.
+        </p>
+        <p>
+          Third, report AI-for-good impact and the AI footprint in one ledger. A
+          <a
+            href="https://doi.org/10.1007/s13280-015-0684-2"
+            target="_blank"
+            rel="noopener"
+            >review in Ambio</a
+          >
+          of multistakeholder partnerships for sustainable development found
+          little evidence of strong performance, and named clear goals, reliable
+          funding and monitoring as conditions for success. Partnerships must be
+          measured to be trusted.
+        </p>
+        <p>
+          AI may yet become one of the strongest tools for meeting the SDGs. But
+          for Microsoft, the decisive asset will not be its algorithms. It will
+          be whether its partners end up stronger – and whether the planet’s
+          ledger balances (SDG 17).
+        </p>
+      </article>
+      <section
+        class="sdgs"
+        aria-label="UN Sustainable Development Goals discussed"
+      >
+        <h3>UN Sustainable Development Goals in this article</h3>
+        <ul>
+          <li><b>SDG 3</b> Good health</li>
+          <li><b>SDG 7</b> Clean energy</li>
+          <li><b>SDG 9</b> Industry & innovation</li>
+          <li><b>SDG 10</b> Reduced inequalities</li>
+          <li><b>SDG 13</b> Climate action</li>
+          <li><b>SDG 17</b> Partnerships</li>
+        </ul>
+      </section>
+      <section class="refs">
+        <h3>References (APA 7th)</h3>
+        <ol>
+          <li>
+            Austin, J. E., &amp; Seitanidi, M. M. (2012). Collaborative value
+            creation: A review of partnering between nonprofits and businesses:
+            Part I. <i>Nonprofit and Voluntary Sector Quarterly, 41</i>(5),
+            726–758.
+            <a
+              href="https://doi.org/10.1177/0899764012450777"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.1177/0899764012450777</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Bankhwal, M., Bisht, A., Chui, M., Roberts, R., &amp; van Heteren,
+            A. (2024).
+            <i>AI for social good: Improving lives and protecting the planet</i
+            >. McKinsey &amp; Company.
+            <a
+              href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good"
+              target="_blank"
+              rel="noopener"
+              >https://www.mckinsey.com/capabilities/quantumblack/our-insights/ai-for-social-good</a
+            >
+          </li>
+          <li>
+            de Vries, A. (2023). The growing energy footprint of artificial
+            intelligence. <i>Joule, 7</i>(10), 2191–2194.
+            <a
+              href="https://doi.org/10.1016/j.joule.2023.09.004"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.1016/j.joule.2023.09.004</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Dyer, J. H., &amp; Singh, H. (1998). The relational view:
+            Cooperative strategy and sources of interorganizational competitive
+            advantage. <i>Academy of Management Review, 23</i>(4), 660–679.
+            <a
+              href="https://doi.org/10.5465/amr.1998.1255632"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.5465/amr.1998.1255632</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Dyer, J. H., Singh, H., &amp; Hesterly, W. S. (2018). The relational
+            view revisited: A dynamic perspective on value creation and value
+            capture. <i>Strategic Management Journal, 39</i>(12), 3140–3162.
+            <a
+              href="https://doi.org/10.1002/smj.2785"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.1002/smj.2785</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Gallucci, M. (2025, September 25). Sweden’s Stegra to supply green
+            steel for Microsoft’s data centers. <i>Canary Media</i>.
+            <a
+              href="https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal"
+              target="_blank"
+              rel="noopener"
+              >https://www.canarymedia.com/articles/green-steel/stegra-microsoft-data-center-deal</a
+            >
+          </li>
+          <li>
+            Johnson, L. (2026, July 13). Microsoft’s data center expansion drove
+            25% emissions spike in 2025: Report. <i>ESG Dive</i>.
+            <a
+              href="https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/"
+              target="_blank"
+              rel="noopener"
+              >https://www.esgdive.com/news/microsofts-data-center-expansion-drove-25-emissions-spike-2025-environmental-sustainability-report/825082/</a
+            >
+          </li>
+          <li>
+            Lavista Ferres, J. M. (2026, September 21).
+            <i>The continued state of global AI diffusion in 2026</i>. Microsoft
+            On the Issues.
+            <a
+              href="https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/"
+              target="_blank"
+              rel="noopener"
+              >https://blogs.microsoft.com/on-the-issues/2026/09/21/the-continued-state-of-global-ai-diffusion-in-2026/</a
+            >
+          </li>
+          <li>
+            Microsoft Research. (n.d.). <i>Creating a sustainable future</i>. AI
+            for Good Research Lab. Retrieved November 7, 2026.
+            <a
+              href="https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future"
+              target="_blank"
+              rel="noopener"
+              >https://www.microsoft.com/en-us/research/group/ai-for-good-research-lab/articles/creating-a-sustainable-future</a
+            >
+          </li>
+          <li>
+            Pattberg, P., &amp; Widerberg, O. (2016). Transnational
+            multistakeholder partnerships for sustainable development:
+            Conditions for success. <i>Ambio, 45</i>(1), 42–51.
+            <a
+              href="https://doi.org/10.1007/s13280-015-0684-2"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.1007/s13280-015-0684-2</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Robinson, C., Ortiz, A., Kim, A., Dodhia, R., Zolli, A., Nagaraju,
+            S. K., Oakleaf, J., Kiesecker, J., &amp; Lavista Ferres, J. M.
+            (2025).
+            <i
+              >Global Renewables Watch: A temporal dataset of solar and wind
+              energy derived from satellite imagery</i
+            >
+            (arXiv:2503.14860) [Preprint].
+            <a
+              href="https://arxiv.org/abs/2503.14860"
+              target="_blank"
+              rel="noopener"
+              >https://arxiv.org/abs/2503.14860</a
+            >
+          </li>
+          <li>
+            Segal, M. (2026, July 13). Microsoft’s carbon footprint jumps 25% as
+            AI buildout challenges climate goals. <i>ESG Today</i>.
+            <a
+              href="https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/"
+              target="_blank"
+              rel="noopener"
+              >https://www.esgtoday.com/microsofts-carbon-footprint-jumps-25-as-ai-buildout-challenges-climate-goals/</a
+            >
+          </li>
+          <li>
+            Smith, B. (2020, January 16).
+            <i>Microsoft will be carbon negative by 2030</i>. Official Microsoft
+            Blog.
+            <a
+              href="https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/"
+              target="_blank"
+              rel="noopener"
+              >https://blogs.microsoft.com/blog/2020/01/16/microsoft-will-be-carbon-negative-by-2030/</a
+            >
+          </li>
+          <li>
+            Smith, B., &amp; Nakagawa, M. (2026, July 9).
+            <i>Responsibly building the AI future</i>. Microsoft On the Issues.
+            <a
+              href="https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/"
+              target="_blank"
+              rel="noopener"
+              >https://blogs.microsoft.com/on-the-issues/2026/07/09/responsibly-building-the-ai-future/</a
+            >
+          </li>
+          <li>
+            Thompson, E. (2026, March 17). Microsoft grows AI for Good program
+            with Uruguay research hub. <i>EdTech Innovation Hub</i>.
+            <a
+              href="https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub"
+              target="_blank"
+              rel="noopener"
+              >https://www.edtechinnovationhub.com/news/microsoft-grows-ai-for-good-program-with-uruguay-research-hub</a
+            >
+          </li>
+          <li>
+            United Nations. (n.d.). <i>The 17 goals</i>. Department of Economic
+            and Social Affairs. Retrieved November 7, 2026.
+            <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener"
+              >https://sdgs.un.org/goals</a
+            >
+          </li>
+          <li>
+            United Nations Statistics Division. (2026).
+            <i>The Sustainable Development Goals report 2026</i> [Press
+            release]. United Nations.
+            <a
+              href="https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf"
+              target="_blank"
+              rel="noopener"
+              >https://unstats.un.org/sdgs/files/report/2026/SDG_Report_2026_Press_Release_EN.pdf</a
+            >
+          </li>
+          <li>
+            Vinuesa, R., Azizpour, H., Leite, I., Balaam, M., Dignum, V.,
+            Domisch, S., Felländer, A., Langhans, S. D., Tegmark, M., &amp; Fuso
+            Nerini, F. (2020). The role of artificial intelligence in achieving
+            the Sustainable Development Goals. <i>Nature Communications, 11</i>,
+            Article 233.
+            <a
+              href="https://doi.org/10.1038/s41467-019-14108-y"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.1038/s41467-019-14108-y</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+          <li>
+            Weeks, W. B., Taliesin, B., &amp; Lavista Ferres, J. M. (2023).
+            Using artificial intelligence to advance public health.
+            <i>International Journal of Public Health, 68</i>, Article 1606716.
+            <a
+              href="https://doi.org/10.3389/ijph.2023.1606716"
+              target="_blank"
+              rel="noopener"
+              >https://doi.org/10.3389/ijph.2023.1606716</a
+            >
+            <span class="pr">Peer-reviewed</span>
+          </li>
+        </ol>
+      </section>
+    </main>
+    <footer>
+      <div class="in">
+        Sustainability Spotlight is a student publication exercise. Charts are
+        the author's own, drawn from the sources cited in each caption.
+      </div>
+    </footer>
+  </body>
 </html>
