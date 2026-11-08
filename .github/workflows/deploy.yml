@@ -1,0 +1,72 @@
+# Checks and publishes the Sustainability Spotlight article to GitHub Pages.
+# Runs on every push to main, and can also be started by hand from the Actions tab.
+name: Deploy article to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions GitHub Pages needs to publish the site
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Run one deployment at a time, and let a deployment that has started finish
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ---------- CI: check the site before publishing ----------
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Check index.html exists
+        run: test -f index.html || { echo "index.html is missing"; exit 1; }
+
+      - name: Check every image used in the page exists
+        run: |
+          missing=0
+          for img in $(grep -o 'src="images/[^"]*"' index.html | sed 's/src="//; s/"$//'); do
+            if [ ! -f "$img" ]; then
+              echo "Missing image: $img"
+              missing=1
+            else
+              echo "Found: $img"
+            fi
+          done
+          exit $missing
+
+      - name: Warn if placeholders are still in the page
+        run: |
+          if grep -q '\[Student name\]' index.html; then
+            echo "::warning::index.html still contains [Student name]. Replace it with your name."
+          fi
+
+  # ---------- CD: publish to GitHub Pages ----------
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Package the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
